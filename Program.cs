@@ -95,3 +95,43 @@ void finishInput()
     Console.WriteLine(arrayToString(resultArray));
 }
 
+void clearInputArray()
+{
+    inputBuffer = new int[]{};
+}
+
+int getRandomArrayLengthFromInput()
+{
+    int result = 10;
+    Console.WriteLine("Введите длину случайного массива целых чисел");
+    while (true)
+    {
+        string? inputString = Console.ReadLine();
+        try
+        {
+            result = int.Parse(inputString!.Replace(" ", ""));
+            if (result <= 0)
+            {
+                Console.WriteLine($"К сожалению, длина массива должна быть положительным числом, больше нуля");
+                continue;
+            }
+            break;
+        }
+        catch (ArgumentNullException)
+        {
+            Console.WriteLine($"Извините, не могу распознать число {inputString}");
+            continue;
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine($"Извините, не могу распознать число {inputString} ошибка формата");
+            continue;
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine($"Извините, число {inputString} выходит за рамки интервала {int.MinValue} .. {int.MaxValue}");
+            continue;
+        }
+    }
+    return result;
+}
