@@ -135,3 +135,46 @@ int getRandomArrayLengthFromInput()
     }
     return result;
 }
+void randomTest()
+{
+    int inputBufferLength = getRandomArrayLengthFromInput();
+    inputBuffer = new int[inputBufferLength];
+    Random random = new Random();
+    for (int i = 0; i < inputBufferLength; i++) {
+        inputBuffer[i] = random.Next();
+    }
+    Console.WriteLine("Входные данные");
+    Console.WriteLine(arrayToString(inputBuffer));
+    int[] resultArray = filterEvens(inputBuffer);
+    Console.WriteLine("Выходные данные");
+    Console.WriteLine(arrayToString(resultArray));
+}
+
+Console.WriteLine("Программа предназначена для фильтрации массива целых чисел по критерию четности.");
+showHelp();
+while (true)
+{
+    string? nextInput = Console.ReadLine();
+    if (nextInput == "1")
+    {
+        startInput();
+    }
+    else if (nextInput == "2" && inputBuffer.Length > 0)
+    {
+        finishInput();
+    }
+    else if (nextInput == "3" && inputBuffer.Length > 0)
+    {
+        clearInputArray();
+    }
+    else if (nextInput == "4")
+    {
+        randomTest();
+    }
+    else if (nextInput == "5")
+    {
+        Console.WriteLine("Спасибо за использование приложения");
+        break;
+    }
+    showHelp();
+}
